@@ -1,7 +1,6 @@
-
 # AWS Backup & Disaster Recovery Automation for Amazon EC2
 
-A production-inspired AWS Backup and Disaster Recovery solution that automates EC2 backup verification, monitoring, alerting, scheduled health checks, and disaster recovery using native AWS services.
+A production-inspired AWS Backup and Disaster Recovery solution that automates EC2 backup verification, monitoring, alerting, and disaster recovery using native AWS services.
 
 ---
 
@@ -12,23 +11,21 @@ This project demonstrates the implementation of an automated Backup and Disaster
 The solution includes:
 
 - Automated EC2 backups using AWS Backup
-- Backup report generation using a Bash automation script
+- Backup report generation using a custom Bash automation script
 - Report storage in Amazon S3
 - Centralized logging with Amazon CloudWatch Logs
 - Backup failure detection using CloudWatch Metric Filters
-- Alarming using Amazon CloudWatch Alarms
+- Monitoring using CloudWatch Alarms
 - Email notifications using Amazon SNS
-- Scheduled automation using Amazon EventBridge Scheduler and AWS Systems Manager
-- Disaster Recovery validation through EC2 restoration
+- Remote execution of the backup verification script using AWS Systems Manager Run Command
+- Disaster Recovery validation by restoring an EC2 instance from an AWS Backup recovery point
 
 ---
 
 # Architecture
 
-> Replace the image below with your architecture diagram.
-
 <p align="center">
-    <img src="backup_dr.png" alt="AWS Backup and Disaster Recovery Architecture" width="100%">
+    <img src="architecture/aws-backup-dr-architecture.png" alt="AWS Backup & Disaster Recovery Architecture" width="100%">
 </p>
 
 ---
@@ -36,28 +33,29 @@ The solution includes:
 # Objectives
 
 - Automate EC2 backup creation
-- Secure backups inside AWS Backup Vault
+- Secure recovery points using AWS Backup Vault
 - Generate automated backup health reports
 - Store reports in Amazon S3
 - Detect backup failures automatically
-- Notify administrators using Amazon SNS
-- Schedule backup verification
+- Notify administrators through Amazon SNS
+- Execute backup verification remotely using AWS Systems Manager
 - Demonstrate Disaster Recovery through EC2 restoration
 
 ---
 
 # Features
 
-- Automated Backup Management
-- Scheduled Backup Verification
-- Timestamped Backup Reports
+- Automated EC2 Backup Management
+- Backup Verification using Bash Automation
+- Timestamped Backup Report Generation
 - Amazon S3 Report Storage
-- CloudWatch Log Monitoring
-- Metric Filter-based Failure Detection
+- Centralized CloudWatch Logging
+- Metric Filter-based Backup Failure Detection
 - CloudWatch Alarm Monitoring
 - Amazon SNS Email Notifications
 - Disaster Recovery Validation
 - IAM Role-based Authentication
+- Remote Script Execution using AWS Systems Manager
 
 ---
 
@@ -74,7 +72,6 @@ The solution includes:
 | CloudWatch Metric Filter | Backup Failure Detection |
 | CloudWatch Alarm | Monitoring |
 | Amazon SNS | Email Notifications |
-| Amazon EventBridge Scheduler | Scheduled Automation |
 | AWS Systems Manager | Remote Script Execution |
 | IAM | Secure Access Management |
 | AWS CLI | Backup Status Retrieval |
@@ -105,8 +102,8 @@ AWS-Backup-Disaster-Recovery-Project/
 │   ├── 07-metric-filter.png
 │   ├── 08-cloudwatch-alarm.png
 │   ├── 09-sns-topic.png
-│   ├── 10-eventbridge-scheduler.png
-│   ├── 11-systems-manager.png
+│   ├── 10-systems-manager-run-command.png
+│   ├── 11-script-output.png
 │   └── 12-restored-instance.png
 │
 └── docs/
@@ -123,10 +120,7 @@ AWS-Backup-Disaster-Recovery-Project/
 Administrator
       │
       ▼
-EventBridge Scheduler
-      │
-      ▼
-AWS Systems Manager
+AWS Systems Manager Run Command
       │
       ▼
 backup_report.sh
@@ -156,7 +150,7 @@ backup_report.sh
                       Amazon SNS
                            │
                            ▼
-                  Email Notification
+                  Administrator Email
 ```
 
 ---
@@ -175,10 +169,10 @@ The project was implemented in the following stages:
 8. Configured CloudWatch Logs.
 9. Created a Metric Filter to detect backup failures.
 10. Configured a CloudWatch Alarm.
-11. Integrated Amazon SNS for email notifications.
-12. Automated script execution using EventBridge Scheduler and AWS Systems Manager.
+11. Configured Amazon SNS email notifications.
+12. Executed the backup verification script remotely using AWS Systems Manager Run Command.
 13. Restored the EC2 instance from a recovery point.
-14. Verified successful disaster recovery.
+14. Verified successful Disaster Recovery.
 
 ---
 
@@ -217,7 +211,7 @@ Amazon SNS
 Administrator Email
 ```
 
-Whenever the backup verification script logs a backup failure, the Metric Filter increments the `BackupFailures` metric. The CloudWatch Alarm transitions to the **ALARM** state and Amazon SNS sends an email notification to the administrator.
+Whenever the backup verification script logs a backup failure, the Metric Filter increments the **BackupFailures** metric. The CloudWatch Alarm transitions to the **ALARM** state and Amazon SNS sends an email notification to the administrator.
 
 ---
 
@@ -228,26 +222,27 @@ Whenever the backup verification script logs a backup failure, the Metric Filter
 | EC2 Instance | Amazon EC2 instance |
 | Backup Plan | AWS Backup Plan |
 | Backup Vault | Backup Vault |
-| Recovery Point | Recovery Point |
+| Recovery Point | Successful Recovery Point |
 | Amazon S3 | Backup Reports |
 | CloudWatch Logs | Log Collection |
 | Metric Filter | Backup Failure Detection |
 | CloudWatch Alarm | Alarm Configuration |
 | Amazon SNS | Notification Topic |
-| EventBridge Scheduler | Scheduled Automation |
-| AWS Systems Manager | Run Command |
+| AWS Systems Manager | Run Command Execution |
+| Script Output | Backup Verification Script |
 | Restored EC2 Instance | Disaster Recovery Validation |
 
 ---
 
 # Future Improvements
 
+- Automate script execution using Amazon EventBridge Scheduler
 - Cross-Region Backup
 - Cross-Account Disaster Recovery
 - Infrastructure as Code using Terraform
 - AWS Backup Audit Manager integration
 - CloudWatch Dashboards
-- Slack and Microsoft Teams notifications
+- Slack or Microsoft Teams notifications
 - Automated Disaster Recovery testing
 - Cost optimization using Lifecycle Policies
 
@@ -261,20 +256,23 @@ This project demonstrates practical implementation of:
 - Amazon EC2
 - Amazon EBS
 - Amazon S3
-- Amazon CloudWatch
+- Amazon CloudWatch Logs
+- CloudWatch Metric Filters
+- CloudWatch Alarms
 - Amazon SNS
-- Amazon EventBridge Scheduler
 - AWS Systems Manager
 - IAM Roles and Policies
 - AWS CLI
 - Bash Automation
-- Disaster Recovery
+- Disaster Recovery Planning
 
 ---
 
 # Author
 
-Omkar Sutrave
+**Omkar Sutrave**
+
+Cloud | AWS | Linux | DevOps
 
 GitHub: https://github.com/omkar47code
 
