@@ -92,24 +92,19 @@ AWS-Backup-Disaster-Recovery-Project/
 ├── scripts/
 │   └── backup_report.sh
 │
-├── screenshots/
-│   ├── 01-ec2-instance.png
-│   ├── 02-backup-plan.png
-│   ├── 03-backup-vault.png
-│   ├── 04-recovery-point.png
-│   ├── 05-s3-bucket.png
-│   ├── 06-cloudwatch-logs.png
-│   ├── 07-metric-filter.png
-│   ├── 08-cloudwatch-alarm.png
-│   ├── 09-sns-topic.png
-│   ├── 10-systems-manager-run-command.png
-│   ├── 11-script-output.png
-│   └── 12-restored-instance.png
-│
-└── docs/
-    ├── HLD.md
-    ├── LLD.md
-    └── implementation-guide.md
+└── screenshots/
+    ├── 01-ec2-instance.png
+    ├── 02-backup-plan.png
+    ├── 03-backup-vault.png
+    ├── 04-recovery-point.png
+    ├── 05-s3-bucket.png
+    ├── 06-cloudwatch-logs.png
+    ├── 07-metric-filter.png
+    ├── 08-cloudwatch-alarm.png
+    ├── 09-sns-topic.png
+    ├── 10-systems-manager-run-command.png
+    ├── 11-script-output.png
+    └── 12-restored-instance.png
 ```
 
 ---
